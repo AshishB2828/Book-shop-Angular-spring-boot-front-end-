@@ -1,0 +1,15 @@
+:host{
+    height: 100vh;
+    display: block;
+    background-color:  rgb(233, 158, 158);
+   border: 1px solid  rgb(233, 158, 158);}
+.custom-card{
+    width: 360px !important;
+    max-width: 100% !important;
+    background-color:#eee !important;
+
+}
+.user-icon{
+    font-size:  100px;
+    color: rgb(143, 221, 136) !important;
+}

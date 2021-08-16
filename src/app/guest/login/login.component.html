@@ -1,0 +1,43 @@
+<div class="container mt-5">
+    <div class="card ms-auto me-auto p-3 shadow-lg custom-card">
+        <!-- <fa-icon [icon]="faUser" class="ms-auto me-auto user-icon"></fa-icon> -->
+        <form #f="ngForm" >
+
+        <div class="alert alert-danger" *ngIf="errMsg">
+            {{errMsg}}
+        </div>
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text"
+                         class="form-control" 
+                         id="username"
+                         name="username"
+                         [(ngModel)]="loginReq.username"
+                         #username ="ngModel"
+                         required>
+                <div class="alert-danger" *ngIf="!username.valid && username.touched">
+                    username is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                         class="form-control" 
+                         id="password"
+                         name="password"
+                         [(ngModel)]="loginReq.password"
+                         #password ="ngModel"
+                         required>
+                <div class="alert-danger" *ngIf="!password.valid && password.touched">
+                    Password is required
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="!f.form.valid" (click)="login()" class="btn btn-success w-100 mt-3">
+                Submit
+            </button>
+        </form>
+        <a [routerLink]="['/register']" class="text-center nav-link text-muted">Don't have an account?</a>
+    </div>
+</div> 
