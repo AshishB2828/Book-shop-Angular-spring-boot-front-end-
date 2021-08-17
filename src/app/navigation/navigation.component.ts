@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent  {
 
-  constructor() { }
+  currentLoggedInUser:User=new User();
+  Admin:boolean =false;
 
-  ngOnInit(): void {
+  constructor(private authService: AuthenticationService, private router:Router){
+
+    this.authService.currentUser.subscribe(data => {
+      this.currentLoggedInUser = data
+    })
   }
 
+  
+  isAdmin():boolean{
+    this.currentLoggedInUser?.roles.forEach(rol => {
+      if (rol.rolename === 'ADMIN')
+      this.Admin = true
+    })
+    return this.Admin
+  }
+
+  logOut(){
+    this.authService.logout();
+    this.router.navigate(['/login'])
+  }
 }
