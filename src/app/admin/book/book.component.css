@@ -1,0 +1,17 @@
+.modal {
+    display: block;
+    height: 100vh;
+    background-color:rgba(104, 98, 98, 0.3);
+  }
+  
+  .modal-body:before,
+    .modal-body:after {
+      display: table;
+      content: " ";
+  }
+  
+  .modal-header:before,
+  .modal-header:after {
+    display: table;
+    content: " ";
+  }

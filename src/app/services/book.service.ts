@@ -6,7 +6,7 @@ import { Book } from '../models/Book.model';
 import { AuthenticationService } from './authentication.service';
 import { RequestBaseService } from './request-base.service';
 
-const BASE_URL = `${environment.BASE_URL}/book`
+const BASE_URL = `${environment.BASE_URL}book`
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class BookService extends RequestBaseService{
   }
 
   saveBook(book:Book):Observable<any> {
-
     return this.http.post(`${BASE_URL}/add`, book, {headers: this.getHeaders});
   }
 

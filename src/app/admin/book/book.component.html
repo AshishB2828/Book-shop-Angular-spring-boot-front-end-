@@ -1,0 +1,116 @@
+<!-- <div class="modal fade" id="lbookModel" style="z-index: 100;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form >
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Book details</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body"></div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit">Save Change</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div> -->
+<div *ngIf="showModal">
+    <div class="modal"  style="z-index: 100 !important;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form  #f="ngForm" (ngSubmit)="createBook()">
+    
+                    <div class="modal-header">
+                        <h5 class="modal-title">Book details</h5>
+                        <button class="btn-close" (click)="showBookModal()"></button>
+                    </div>
+    
+                    <div class="modal-body">
+                        <div class="alert alert-danger" *ngIf="errMsg">
+                            <strong>Error!</strong> {{errMsg}}
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input 
+                            type="text" 
+                            id="title" 
+                            class="form-control"
+                            name="title"
+                            [(ngModel)]="book.title"
+                            required
+                            #title="ngModel"
+                            >
+                            <div class="alert-danger" *ngIf="!title.valid && title.touched">
+                                    Book title is required !
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input 
+                            type="text" 
+                            id="author" 
+                            class="form-control"
+                            name="author"
+                            [(ngModel)]="book.author"
+                            required
+                            #author="ngModel"
+                            >
+                            <div class="alert-danger" *ngIf="!author.valid && author.touched">
+                                    Book author is required !
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="author">Price</label>
+                            <input 
+                            type="number" 
+                            id="price" 
+                            class="form-control"
+                            name="price"
+                            [(ngModel)]="book.price"
+                            required
+                            #price="ngModel"
+                            >
+                            <div class="alert-danger" *ngIf="!price.valid && price.touched">
+                                    Book price is required !
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea 
+                          
+                            id="description" 
+                            class="form-control"
+                            name="description"
+                            [(ngModel)]="book.description"
+                            required
+                            #description="ngModel"
+                            ></textarea>
+                            <div class="alert-danger" *ngIf="!description.valid&& description.touched">
+                                    Book description is required !
+                            </div>
+                        </div>
+    
+    
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" (click)="showBookModal()">Close</button>
+                        <button 
+                        [disabled]="!f.form.valid"
+                        class="btn btn-primary" type="submit">Save Change</button>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
