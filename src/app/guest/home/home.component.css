@@ -1,5 +1,5 @@
-.book-icon{
-    
+.active{
+   background-color: gray; 
 }
 .custom-size{
     height: 200px;

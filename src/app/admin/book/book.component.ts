@@ -21,7 +21,8 @@ export class BookComponent  {
  createBook(){
   this.showModal=!this.showModal
    this.bookService.saveBook(this.book).subscribe(
-     data=>this.emitDataToParent.emit(data)
+     data=>{this.emitDataToParent.emit(data)
+            this.book =new Book()}
      , error=>{
        this.errMsg="An unexpected error occured !"
       console.log(error)}

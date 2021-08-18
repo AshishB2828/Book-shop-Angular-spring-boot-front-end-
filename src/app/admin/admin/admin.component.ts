@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Book } from 'src/app/models/Book.model';
+import { ItemsWithPage } from 'src/app/models/ListOfBokksWithPage.model';
 import { BookService } from 'src/app/services/book.service';
 import { BookComponent } from '../book/book.component';
 
@@ -9,8 +10,9 @@ import { BookComponent } from '../book/book.component';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
-  bookList: Array<Book> = [];
+  pageSize:number =6;
+  clicked:number=0;
+  bookList: ItemsWithPage = new ItemsWithPage();
   errMsg:string =""
   selectedBook:Book =new Book()
 
@@ -19,8 +21,9 @@ export class AdminComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.bookService.getAllBokks().subscribe(
-      data => this.bookList = data
+    this.bookService.getAllBooksWithPage(0, this.pageSize).subscribe(
+      data => {this.bookList = data
+      console.log(this.bookList)}
       , error=> console.log(error.message)
     )
   }
@@ -32,10 +35,10 @@ export class AdminComponent implements OnInit {
   }
 
   saveBookWatcher(book:Book) {
-    let itemIndex = this.bookList.findIndex(item=>item.id === book.id);
+    let itemIndex = this.bookList?.content.findIndex(item=>item.id === book.id);
 
-    if(itemIndex !== -1) this.bookList[itemIndex] = book;
-    else  this.bookList.push(book);
+    if(itemIndex !== -1) this.bookList.content[itemIndex] = book;
+    else  this.bookList?.content.push(book);
   }
 
 
@@ -47,7 +50,7 @@ export class AdminComponent implements OnInit {
   }
 
   deleteBook(item:Book, index:number) {
-    this.bookList.splice(index, 1)
+    this.bookList.content.splice(index, 1)
     this.bookService.deleteBook(item).subscribe(
       data=>console.log(data),
       error=>{
@@ -55,5 +58,20 @@ export class AdminComponent implements OnInit {
         console.log(error)
       }
     )
+  }
+
+  
+  pageCount(){
+    return new Array(this.bookList.totalPages)
+  }
+
+  requestPage(pageNumber:any){
+    this.clicked =pageNumber-1
+     this.bookService.getAllBooksWithPage(pageNumber, this.pageSize).subscribe(
+      (data)=> {
+        this.bookList=data
+      }
+     )
+    
   }
 }

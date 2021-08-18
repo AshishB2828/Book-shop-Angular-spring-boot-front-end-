@@ -28,7 +28,8 @@ import { BookComponent } from './admin/book/book.component';
     UauthroizedComponent,
     NotfoundComponent,
     NavigationComponent,
-    BookComponent
+    BookComponent,
+    
   ],
   imports: [
     BrowserModule,

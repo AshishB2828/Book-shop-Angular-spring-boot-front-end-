@@ -31,21 +31,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let book of bookList; index as in">
+                        <tr *ngFor="let book of bookList.content; index as in">
                             <td scope="row">{{in+1}}</td>
                             <td scope="row">{{book.title}}</td>
                             <td scope="row">{{book.price | currency:'INR'}}</td>
                             <td scope="row">{{book.author}}</td>
                             <td scope="row">{{book.createTime | date:'medium'}}</td>
                             <td scope="row">
+                            <div class="d-flex">
                                 <button class="btn btn-primary me-1" (click)="editBook(book)">Edit</button>
                                 <button class="btn btn-danger"(click)="deleteBook(book,in)">Delete</button>
+                            </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <div 
+    class="d-flex " >
+       <div 
+       *ngFor="let page of pageCount(); index as in"
+       >
+           <div
+           style="cursor: pointer;"
+           class="p-2 border m-1"
+           [class.active]="clicked === in" 
+           (click)="requestPage(in+1)">{{in+1}}</div>
+       </div>
+    </div>
     </div>
 
     <app-book 

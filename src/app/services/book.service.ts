@@ -28,4 +28,9 @@ export class BookService extends RequestBaseService{
   getAllBokks():Observable<any> {
     return this.http.get(`${BASE_URL}`)
   }
+
+  
+  getAllBooksWithPage(number:number, size:number):Observable<any> {
+    return this.http.get(`${BASE_URL}/page?page=${number}&size=${size}`)
+  }
 }
