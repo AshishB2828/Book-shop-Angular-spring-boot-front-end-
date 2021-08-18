@@ -23,9 +23,9 @@ export class PurchaseService extends RequestBaseService{
      return this.http.post(BASE_URL ,purchase, {headers: this.getHeaders})
   }
 
-  getPurchasItems():Observable<any>{
+  getPurchasItems(id:any):Observable<any>{
 
-    return this.http.get(`${BASE_URL}/`, {headers: this.getHeaders})
+    return this.http.get(`${BASE_URL}/${id}`, {headers: this.getHeaders})
   }
 
 

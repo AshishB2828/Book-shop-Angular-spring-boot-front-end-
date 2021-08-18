@@ -1,1 +1,31 @@
-<p>profile works!</p>
+<div class="container">
+    <div class="pt-5">
+        <div class="card">
+            <div class="card-header">
+                All purchase item
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of purchaseItemList; index as in">
+                            <th scope="row">{{in+1}}</th>
+                            <td>{{item.title}}</td>
+                            <td>{{item.price | currency:'INR'}}</td>
+                            <td>{{item.purchaseTime | date: 'medium'}}</td>
+                        </tr>
+                    </tbody>
+                       
+                </table>
+            </div>
+        </div> 
+    </div>
+</div>
