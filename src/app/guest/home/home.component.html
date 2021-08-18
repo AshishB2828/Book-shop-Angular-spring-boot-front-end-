@@ -12,12 +12,22 @@
         style="width:300px; background-color:lightgray;">
 
 
-        <fa-icon class="ms-auto me-auto book-icon"></fa-icon>
+        <img 
+        *ngIf="book.imageUrl"
+        class="card-img-top custom-size" 
+        src="{{book.imageUrl}}" alt="Card image cap">
+        <div 
+        *ngIf="!book.imageUrl"
+        class="custom-size text-center" 
+        style="background-color: rgb(151, 206, 206);">
+            <h5 class="center-block mt-4">No image Available</h5>
+        </div>
 
         <div class="card-body">
             <h5 class="card-title">{{book.title}}</h5>
             <h6 class="card-subtitle mb-2 text-mutated">{{book.price | currency:'INR'}}</h6>
-            <p class="card-text">{{book.description}}</p>
+            <p class="card-text">{{book.description | slice:0:100}}.....</p>
+           
             <button class="w-100 btn mt-3 btn-primary" (click)="purchaseBook(book)">Buy now</button>
         </div>
 
